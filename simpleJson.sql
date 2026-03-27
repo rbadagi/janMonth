@@ -1,0 +1,23 @@
+-- CTE
+WITH kites AS (
+  SELECT kite_id
+  FROM ABC.SHOP
+  WHERE NAME LIKE '%dragon%'
+),
+bill_ids AS(
+  SELECT bill_shopid
+  FROM ABC.COMMERCIAL
+  WHERE COMMERCIAL_ID IN (SELECT kite_id FROM kites)
+)
+SELECT DISTINCT NAME
+FROM ABC.SHOP 
+WHERE kite_id IN (SELECT bill_shopid FROM bill_ids)
+
+
+SELECT DISTINCT C2.NAME
+FROM ABC.SHOP c1
+JOIN ABC.COMMERCIAL cb
+ ON c1.KITE_ID = cb.bill_shopid
+JOIN ABC.SHOP c2
+ ON cb.BILL_ID = c2.KITE_ID
+WHERE c1.NAME LIKE '%dragon%'
