@@ -317,3 +317,215 @@ itertools.product	    Cartesian product	Replace nested loops
 itertools.combinations	Choose r from n	    Subset generation
 itertools.accumulate	Running reductions	Prefix sums, running max
 itertools.cycle/count	Infinite iterators	Schedulers, generators"""
+
+In Python, **`itertools.groupby()`** is used to **group consecutive elements** of an iterable that share the same key. It’s important to understand that it **does not group all identical items globally**—only **adjacent** ones.
+
+***
+
+## Basic usage
+
+```python
+import itertools
+
+for key, group in itertools.groupby(iterable, key=None):
+    ...
+```
+
+*   **`iterable`**: any iterable (list, string, generator, etc.)
+*   **`key`** (optional): a function that computes the grouping key (defaults to the element itself)
+*   Returns `(key, group_iterator)` pairs
+
+***
+
+## Simple example
+
+```python
+from itertools import groupby
+
+data = [1, 1, 2, 2, 2, 3, 1, 1]
+
+for key, group in groupby(data):
+    print(key, list(group))
+```
+
+### Output
+
+    1 [1, 1]
+    2 [2, 2, 2]
+    3 [3]
+    1 [1, 1]
+
+👉 Notice that `1` appears **twice**, because the sequence was interrupted by other values.
+
+***
+
+## Grouping with a key function
+
+### Example: group numbers by even/odd
+
+```python
+from itertools import groupby
+
+nums = [1, 3, 5, 2, 4, 6, 1, 2]
+
+for key, group in groupby(nums, key=lambda x: x % 2):
+    print(key, list(group))
+```
+
+### Output
+
+    1 [1, 3, 5]
+    0 [2, 4, 6]
+    1 [1]
+    0 [2]
+
+*   `key = 1` → odd numbers
+*   `key = 0` → even numbers
+
+***
+
+## VERY IMPORTANT: sorting before groupby
+
+If you want to group **all similar items together**, you **must sort first**.
+
+### Incorrect (unsorted)
+
+```python
+data = ['apple', 'banana', 'apple', 'banana']
+for k, g in groupby(data):
+    print(k, list(g))
+```
+
+### Output
+
+    apple ['apple']
+    banana ['banana']
+    apple ['apple']
+    banana ['banana']
+
+### Correct (sorted)
+
+```python
+data = ['apple', 'banana', 'apple', 'banana']
+data.sort()
+
+for k, g in groupby(data):
+    print(k, list(g))
+```
+
+### Output
+
+    apple ['apple', 'apple']
+    banana ['banana', 'banana']
+
+✅ **Rule of thumb**:
+
+> `groupby()` works best on **already-grouped or sorted data**
+
+***
+
+## Common real-world use cases
+
+### 1. Remove consecutive duplicates
+
+```python
+from itertools import groupby
+
+data = [1, 1, 2, 2, 3, 1, 1]
+result = [key for key, _ in groupby(data)]
+print(result)
+```
+
+✅ Output:
+
+    [1, 2, 3, 1]
+
+***
+
+### 2. Count consecutive items
+
+```python
+from itertools import groupby
+
+data = "aaabbcccaa"
+
+for char, group in groupby(data):
+    print(char, len(list(group)))
+```
+
+Output:
+
+    a 3
+    b 2
+    c 3
+    a 2
+
+***
+
+### 3. Group objects by attribute
+
+```python
+from itertools import groupby
+
+employees = [
+    {"name": "A", "dept": "HR"},
+    {"name": "B", "dept": "HR"},
+    {"name": "C", "dept": "IT"},
+]
+
+employees.sort(key=lambda x: x["dept"])
+
+for dept, group in groupby(employees, key=lambda x: x["dept"]):
+    print(dept, list(group))
+```
+
+***
+
+## Common pitfalls ❌
+
+1.  **Forgetting to sort**
+2.  **Assuming it behaves like SQL GROUP BY or pandas groupby**
+3.  **Trying to reuse `group` iterator** (it is exhausted after one use)
+
+❌ Wrong:
+
+```python
+g = list(group)
+print(list(group))  # empty
+```
+
+✅ Correct:
+
+```python
+g = list(group)
+print(g)
+```
+
+***
+
+## When to use `groupby` vs alternatives
+
+| Use case             | Recommended                                   |
+| -------------------- | --------------------------------------------- |
+| Consecutive grouping | ✅ `itertools.groupby`                         |
+| Global grouping      | ✅ `dict`, `defaultdict`, `Counter`, or pandas |
+| Streaming data       | ✅ `groupby`                                   |
+| Need random access   | ❌ Not groupby                                 |
+
+***
+
+## Summary
+
+*   `groupby()` groups **adjacent elements**
+*   Requires **sorting** for full grouping
+*   Best for **streaming, ordered data**
+*   Lightweight and memory-efficient
+
+If you want, I can also:
+
+*   Compare `groupby` with **pandas groupby**
+*   Show **performance differences**
+*   Provide **interview-style examples**
+
+Just tell me 😊
+
