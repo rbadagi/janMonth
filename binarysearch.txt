@@ -1,0 +1,235 @@
+##ff
+In **DSA (Data Structures & Algorithms)**, **search-related programs** focus on finding an element or information efficiently from a data structure. Below are the **main types of search algorithms**, along with **Python examples** commonly expected in interviews and exams.
+
+***
+
+## ✅ 1. Linear Search (Sequential Search)
+
+**Concept:**  
+Checks each element one by one.
+
+**Time Complexity:**
+
+*   Best: **O(1)**
+*   Worst: **O(n)**
+
+**Used when:**
+
+*   Small or unsorted data
+
+```python
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+arr = [10, 25, 30, 45, 60]
+print(linear_search(arr, 45))  # Output: 3
+```
+
+***
+
+## ✅ 2. Binary Search (Iterative)
+
+**Concept:**  
+Divides sorted array into halves.
+
+**Requirement:** ✅ Sorted array  
+**Time Complexity:** **O(log n)**
+
+```python
+def binary_search(arr, target):
+    low, high = 0, len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return -1
+
+arr = [10, 20, 30, 40, 50]
+print(binary_search(arr, 30))  # Output: 2
+```
+
+***
+
+## ✅ 3. Binary Search (Recursive)
+
+```python
+def binary_search_recursive(arr, low, high, target):
+    if low > high:
+        return -1
+
+    mid = (low + high) // 2
+
+    if arr[mid] == target:
+        return mid
+    elif arr[mid] < target:
+        return binary_search_recursive(arr, mid + 1, high, target)
+    else:
+        return binary_search_recursive(arr, low, mid - 1, target)
+
+arr = [1, 3, 5, 7, 9]
+print(binary_search_recursive(arr, 0, len(arr)-1, 7))  # Output: 3
+```
+
+***
+
+## ✅ 4. Jump Search
+
+**Concept:**  
+Jumps ahead by fixed steps, then does linear search.
+
+**Requirement:** ✅ Sorted array  
+**Time Complexity:** **O(√n)**
+
+```python
+import math
+
+def jump_search(arr, target):
+    n = len(arr)
+    step = int(math.sqrt(n))
+    prev = 0
+
+    while prev < n and arr[min(step, n)-1] < target:
+        prev = step
+        step += int(math.sqrt(n))
+        if prev >= n:
+            return -1
+
+    for i in range(prev, min(step, n)):
+        if arr[i] == target:
+            return i
+
+    return -1
+```
+
+***
+
+## ✅ 5. Interpolation Search
+
+**Concept:**  
+Position calculated using value distribution.
+
+**Best for:** Uniformly distributed sorted data  
+**Average Time:** **O(log log n)**  
+**Worst:** **O(n)**
+
+```python
+def interpolation_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high and target >= arr[low] and target <= arrpos = low + ((high - low) *
+                     (target - arr[low]) //
+                     (arr[high] - arr[low]))
+
+        if arr[pos] == target:
+            return pos
+        if arr[pos] < target:
+            low = pos + 1
+        else:
+            high = pos - 1
+
+    return -1
+```
+
+***
+
+## ✅ 6. Exponential Search
+
+**Concept:**  
+Finds range first, then applies binary search.
+
+**Used when:** Infinite or large sorted arrays  
+**Time Complexity:** **O(log n)**
+
+```python
+def exponential_search(arr, target):
+    if arr[0] == target:
+        return 0
+
+    i = 1
+    while i < len(arr) and arr[i] <= target:
+        i *= 2
+
+    return binary_search(arr[min(i, len(arr)-1):i*2], target)
+```
+
+***
+
+## ✅ 7. Search in Data Structures
+
+### 🔹 Search in List
+
+```python
+if 10 in [5, 10, 15]:
+    print("Found")
+```
+
+### 🔹 Search in Dictionary (Fast: O(1))
+
+```python
+data = {"a": 1, "b": 2}
+print("a" in data)   # True
+```
+
+### 🔹 Search in Set
+
+```python
+s = {10, 20, 30}
+print(20 in s)  # True
+```
+
+***
+
+## ✅ 8. Tree Search (Binary Search Tree)
+
+```python
+def search_bst(root, key):
+    if root is None or root.data == key:
+        return root
+    if key < root.data:
+        return search_bst(root.left, key)
+    return search_bst(root.right, key)
+```
+
+***
+
+## ✅ Summary Table
+
+| Search Type   | Data Requirement | Time Complexity |
+| ------------- | ---------------- | --------------- |
+| Linear        | Any              | O(n)            |
+| Binary        | Sorted           | O(log n)        |
+| Jump          | Sorted           | O(√n)           |
+| Interpolation | Sorted (uniform) | O(log log n)    |
+| Exponential   | Sorted           | O(log n)        |
+| Hash/Dict     | Key-based        | O(1)            |
+| BST Search    | Tree             | O(log n)        |
+
+***
+
+### ✅ Common Interview Programs
+
+*   Find first & last occurrence
+*   Search in rotated sorted array
+*   Count occurrences using binary search
+*   Search in 2D matrix
+*   Find peak element
+
+If you want, I can also:
+
+*   ✅ Give **interview questions**
+*   ✅ Share **practice problems**
+*   ✅ Explain **which search to use when**
+*   ✅ Provide **college exam-oriented answers**
+
+Just tell me 👍
