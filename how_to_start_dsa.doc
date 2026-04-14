@@ -1,0 +1,899 @@
+##write doc 
+DSA (Data Structures & Algorithms) in Python programming covers the same core concepts as any other language, but implemented using Python’s syntax and built in features. Below is a complete, structured list of DSA topics, from basics to advanced, with Python context.
+________________________________________
+1. Python Basics for DSA (Prerequisites)
+Before DSA, you should be comfortable with:
+•	Variables and data types
+•	if, for, while loops
+•	Functions
+•	Recursion
+•	Time & space complexity basics (Big O notation)
+________________________________________
+2. Core Data Structures in Python
+2.1 Arrays / Lists
+(Python uses lists instead of arrays)
+•	List operations (insert, delete, access)
+•	Traversal
+•	Slicing
+•	2D lists (matrices)
+Examples
+•	Finding max/min
+•	Reverse a list
+•	Rotate array
+•	Kadane’s algorithm
+________________________________________
+2.2 Strings
+•	String manipulation
+•	Palindrome checking
+•	Anagrams
+•	Pattern matching
+•	Substrings & subsequences
+________________________________________
+2.3 Tuples
+•	Immutable data handling
+•	Tuple unpacking
+•	Use cases in DSA
+________________________________________
+2.4 Sets
+•	Union, intersection, difference
+•	Removing duplicates
+•	Hash based operations
+________________________________________
+2.5 Dictionaries (Hash Maps)
+•	Key value storage
+•	Frequency counting
+•	Hashing concepts
+•	Collision understanding (conceptual)
+Common Problems
+•	Two Sum
+•	Frequency of elements
+•	First non repeating character
+________________________________________
+3. Linear Data Structures
+3.1 Stack
+(LIFO – Last In First Out)
+•	Implement using list
+•	Push, pop, peek
+•	Applications: 
+o	Expression evaluation
+o	Parenthesis checking
+o	Undo/redo operations
+________________________________________
+3.2 Queue
+(FIFO – First In First Out)
+•	Using collections.deque
+•	Circular queue
+•	Priority queue (heap based)
+________________________________________
+3.3 Deque
+•	Insert/delete from both ends
+•	Sliding window problems
+________________________________________
+3.4 Linked List
+(Not built in, implemented manually)
+•	Singly linked list
+•	Doubly linked list
+•	Circular linked list
+Operations
+•	Insert, delete, search
+•	Reverse a linked list
+•	Detect loop (Floyd’s cycle detection)
+________________________________________
+4. Non Linear Data Structures
+4.1 Trees
+•	Tree terminology
+•	Binary Tree
+•	Binary Search Tree (BST)
+•	Tree traversals: 
+o	Inorder
+o	Preorder
+o	Postorder
+o	Level order
+Advanced Trees
+•	AVL Tree
+•	Heap (Min Heap & Max Heap)
+________________________________________
+4.2 Heap
+•	Implement using heapq
+•	Priority queues
+•	Top K elements problems
+________________________________________
+4.3 Graphs
+•	Graph representation: 
+o	Adjacency list
+o	Adjacency matrix
+•	Directed vs Undirected
+•	Weighted vs Unweighted
+Graph Traversals
+•	BFS (Breadth First Search)
+•	DFS (Depth First Search)
+Graph Algorithms
+•	Shortest path (Dijkstra)
+•	Cycle detection
+•	Topological sorting
+________________________________________
+5. Algorithms
+5.1 Searching Algorithms
+•	Linear search
+•	Binary search (iterative & recursive)
+________________________________________
+5.2 Sorting Algorithms
+•	Bubble sort
+•	Selection sort
+•	Insertion sort
+•	Merge sort
+•	Quick sort
+•	Heap sort
+•	Counting sort
+________________________________________
+5.3 Recursion & Backtracking
+•	Recursive functions
+•	Stack behavior
+•	Backtracking problems: 
+o	N Queens
+o	Sudoku solver
+o	Permutations & combinations
+________________________________________
+5.4 Divide and Conquer
+•	Merge sort
+•	Quick sort
+•	Binary search
+________________________________________
+5.5 Greedy Algorithms
+•	Activity selection
+•	Coin change (greedy version)
+•	Minimum spanning tree concepts
+________________________________________
+5.6 Dynamic Programming (DP)
+•	Memoization
+•	Tabulation
+•	Overlapping subproblems
+•	Optimal substructure
+Classic DP Problems
+•	Fibonacci
+•	Knapsack
+•	Longest Common Subsequence (LCS)
+•	Longest Increasing Subsequence (LIS)
+________________________________________
+6. Algorithmic Paradigms
+•	Brute force
+•	Two pointer technique
+•	Sliding window
+•	Hashing
+•	Greedy
+•	Backtracking
+•	Dynamic programming
+________________________________________
+7. Time & Space Complexity
+•	Big O, Big Ω, Big Θ
+•	Best, average, worst case
+•	Optimizing Python code for DSA
+________________________________________
+8. Python Specific DSA Tools
+•	collections (deque, Counter, defaultdict)
+•	heapq
+•	bisect
+•	itertools
+•	functools.lru_cache (DP optimization)
+________________________________________
+9. Practice Platforms (Python Friendly)
+•	LeetCode
+•	GeeksforGeeks
+•	HackerRank
+•	CodeChef
+•	Codeforces
+________________________________________
+10. Interview Focused DSA Topics (Very Important)
+•	Arrays & Strings
+•	HashMap problems
+•	Stack & Queue
+•	Trees and BST
+•	Graph basics (BFS/DFS)
+•	Recursion & DP
+•	Sliding window & two pointers
+________________________________________
+✅ Suggested Learning Order
+1.	Python basics
+2.	Arrays & strings
+3.	Stack, queue, linked list
+4.	Searching & sorting
+5.	Recursion & backtracking
+6.	Trees & BST
+7.	Heaps & graphs
+8.	Dynamic programming
+If you want, I can also:
+•	Create a DSA learning roadmap
+•	Share Python DSA interview questions
+•	Give daily DSA practice plans
+•	Explain any single topic with examples
+Just tell me 👍
+Dynamic Programming (DP) can feel hard at first, but most DP problems follow repeatable patterns. Below is a clear, practical method to solve DP problems in Python, with examples, templates, and mental checklists.
+________________________________________
+How to Solve DP Problems in Python (Step by Step)
+What is DP?
+Dynamic Programming is used when a problem has:
+1.	Overlapping subproblems
+2.	Optimal substructure (the solution depends on smaller solutions)
+________________________________________
+Golden Rule of DP
+“Save results of subproblems so you don’t compute them again.”
+________________________________________
+Step by Step DP Thinking Process
+✅ Step 1: Identify the Subproblem
+Ask:
+•	What is changing?
+•	What parameters define a state?
+Example
+•	Fibonacci → subproblem = fib(n)
+•	Knapsack → dp[i][w] = using first i items with capacity w
+________________________________________
+✅ Step 2: Write the Recurrence Relation
+How does the current answer depend on smaller ones?
+Example
+fib(n) = fib(n−1) + fib(n−2)
+________________________________________
+✅ Step 3: Decide DP Type
+Type	When to Use
+1D DP	Sequential choices
+2D DP	Two changing parameters
+Memoization (Top Down)	Recursive intuition
+Tabulation (Bottom Up)	Faster & iterative
+________________________________________
+✅ Step 4: Define Base Case
+Smallest valid inputs.
+fib(0) = 0
+fib(1) = 1
+________________________________________
+✅ Step 5: Implement & Optimize
+________________________________________
+DP Implementation Styles in Python
+1️⃣ Memoization (Top Down DP)
+Fibonacci – Memoization
+from functools import lru_cache
+
+@lru_cache(None)
+def fib(n):
+    if n <= 1:
+        return n
+    return fib(n-1) + fib(n-2)
+✅ Easy to write
+❌ Recursive stack may overflow for very large inputs
+________________________________________
+2️⃣ Tabulation (Bottom Up DP)
+Fibonacci – Tabulation
+def fib(n):
+    dp = [0] * (n + 1)
+    dp[1] = 1
+
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+
+    return dp[n]
+✅ Faster
+✅ No recursion
+✅ Preferred in interviews
+________________________________________
+Core DP Patterns (Very Important)
+Pattern 1: 1D DP (Linear Problems)
+Example: Climbing Stairs
+def climbStairs(n):
+    if n <= 2:
+        return n
+
+    dp = [0] * (n + 1)
+    dp[1], dp[2] = 1, 2
+
+    for i in range(3, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+
+    return dp[n]
+________________________________________
+Pattern 2: 2D DP (Grid / Choice Problems)
+Example: 0/1 Knapsack
+def knapsack(W, wt, val, n):
+    dp = [[0] * (W + 1) for _ in range(n + 1)]
+
+    for i in range(1, n + 1):
+        for w in range(W + 1):
+            if wt[i-1] <= w:
+                dp[i][w] = max(
+                    val[i-1] + dp[i-1][w - wt[i-1]],
+                    dp[i-1][w]
+                )
+            else:
+                dp[i][w] = dp[i-1][w]
+
+    return dp[n][W]
+________________________________________
+Pattern 3: DP on Strings
+Example: Longest Common Subsequence (LCS)
+def lcs(text1, text2):
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if text1[i-1] == text2[j-1]:
+                dp[i][j] = 1 + dp[i-1][j-1]
+            else:
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+
+    return dp[m][n]
+________________________________________
+Pattern 4: DP + Decision Making
+Example: House Robber
+def rob(nums):
+    if not nums:
+        return 0
+    if len(nums) == 1:
+        return nums[0]
+
+    dp = [0] * len(nums)
+    dp[0] = nums[0]
+    dp[1] = max(nums[0], nums[1])
+
+    for i in range(2, len(nums)):
+        dp[i] = max(dp[i-1], nums[i] + dp[i-2])
+
+    return dp[-1]
+________________________________________
+Space Optimization Trick (Very Important)
+Instead of:
+dp[i] depends on dp[i-1], dp[i-2]
+Use:
+prev2, prev1 = 0, 1
+for i in range(2, n+1):
+    curr = prev1 + prev2
+    prev2 = prev1
+    prev1 = curr
+✅ Reduces space from O(N) ➜ O(1)
+________________________________________
+How to Recognize a DP Problem?
+Look for keywords:
+•	“Maximum / Minimum”
+•	“Number of ways”
+•	“Longest / Shortest”
+•	“Choose / Partition”
+•	“Optimal”
+________________________________________
+Common Mistakes (Avoid These)
+❌ Forgetting base cases
+❌ Wrong state definition
+❌ Off by one errors
+❌ Using recursion without memoization
+❌ Not checking constraints (TLE)
+________________________________________
+Interview DP Strategy
+1.	Start with brute force
+2.	Add memoization
+3.	Convert to tabulation
+4.	Optimize space (if asked)
+________________________________________
+Must Practice DP Problems
+•	Fibonacci
+•	Climbing Stairs
+•	House Robber
+•	Knapsack
+•	Coin Change
+•	LCS
+•	LIS
+•	Matrix Grid paths
+________________________________________
+If you want next: ✅ DP problem solving cheat sheet
+✅ Daily DP practice roadmap (30 days)
+✅ DP patterns classified by interview problems
+✅ Explain any DP problem step by step
+Just tell me which one 👌
+Here’s a beginner friendly Dynamic Programming (DP) roadmap designed to take you from zero DP knowledge to interview ready, step by step. This roadmap assumes you’re using Python and already know basic loops, lists, and functions.
+________________________________________
+🧭 Dynamic Programming Roadmap for Beginners
+Phase 0: Prerequisites (VERY IMPORTANT)
+⏱️ Time: 2–3 days
+Before DP, make sure you understand:
+•	Python basics (if, loops, lists, functions)
+•	Recursion
+•	Time complexity (Big O basics)
+✅ Practice:
+•	Fibonacci (recursive)
+•	Factorial
+•	Binary search (recursive)
+________________________________________
+Phase 1: Understand DP Fundamentals
+⏱️ Time: 2–3 days
+What to Learn
+•	What is Dynamic Programming?
+•	Overlapping subproblems
+•	Optimal substructure
+•	Memoization vs Tabulation
+Key Concept
+DP = Recursion + Storing results
+Practice Problems
+•	Fibonacci (with memoization)
+•	Climbing Stairs
+✅ Goal:
+Convert a recursive solution → memoized solution
+________________________________________
+Phase 2: 1D DP (Linear DP)
+⏱️ Time: 4–5 days
+Common Pattern
+dp[i] = best result until index i
+Topics
+•	Fibonacci optimization
+•	Climbing stairs
+•	Min cost climbing stairs
+•	House Robber
+•	Decode Ways
+Example Problems
+•	House Robber
+•	Maximum Subarray (Kadane’s Algorithm)
+•	Jump Game
+✅ Skills Gained:
+•	Writing dp arrays
+•	Understanding state transitions
+•	Space optimization (O(1) DP)
+________________________________________
+Phase 3: DP on Arrays & Subsets
+⏱️ Time: 5–6 days
+Topics
+•	Subset problems
+•	0/1 Knapsack
+•	Partition Equal Subset Sum
+•	Target Sum
+Pattern
+dp[i][w] → considering first i elements with capacity w
+✅ Problems to Solve:
+•	0/1 Knapsack
+•	Subset Sum
+•	Coin Change (limited coins)
+✅ Skills Gained:
+•	2D DP
+•	Decision-based DP
+•	Table filling logic
+________________________________________
+Phase 4: DP on Strings
+⏱️ Time: 5–6 days
+Topics
+•	Longest Common Subsequence (LCS)
+•	Longest Palindromic Subsequence
+•	Edit Distance
+•	String matching using DP
+Common DP Table
+dp[i][j] = answer for first i chars and first j chars
+✅ Must Do Problems:
+•	LCS
+•	Edit Distance
+•	Longest Palindromic Subsequence
+✅ Skills Gained:
+•	Thinking in 2 dimensions
+•	Character matching logic
+________________________________________
+Phase 5: Unbounded Knapsack Pattern
+⏱️ Time: 3–4 days
+Topics
+•	Coin Change (unlimited coins)
+•	Rod Cutting
+•	Integer Break
+Pattern Difference
+•	Item can be reused
+•	Transition stays in same row
+✅ Problems:
+•	Coin Change (minimum coins)
+•	Coin Change (number of ways)
+________________________________________
+Phase 6: Grid / Matrix DP
+⏱️ Time: 3–4 days
+Topics
+•	Unique Paths
+•	Minimum Path Sum
+•	Grid with obstacles
+Pattern
+dp[i][j] = from top + from left
+✅ Problems:
+•	Unique Paths
+•	Minimum Path Sum
+✅ Skills:
+•	Grid movement DP
+•	Boundary handling
+________________________________________
+Phase 7: Advanced DP Concepts (Optional for Beginners)
+⏱️ Time: 7–10 days
+Topics
+•	DP with Bitmasking
+•	DP on Trees
+•	DP on Graphs
+•	State compression
+✅ Only if:
+•	You are preparing for product based company interviews
+________________________________________
+Phase 8: DP Patterns Revision & Optimization
+⏱️ Ongoing
+Learn These Patterns
+✅ Linear DP
+✅ Choice based DP
+✅ Knapsack pattern
+✅ String DP
+✅ Grid DP
+Practice Strategy
+•	Solve 1 problem/day
+•	Rewrite solution without looking
+•	Explain DP logic out loud
+________________________________________
+📅 Suggested 30 Day Beginner Plan
+Week	Focus
+Week 1	Recursion + DP basics
+Week 2	1D DP + Subset DP
+Week 3	String DP + Unbounded DP
+Week 4	Grid DP + Revision
+________________________________________
+✅ How You Know You’re Good at DP
+•	You can define the DP state quickly
+•	You know what dp[i] means
+•	You can convert recursion → tabulation
+•	You recognize DP patterns instantly
+________________________________________
+🔑 Golden Advice for Beginners
+•	Never jump directly to DP
+•	Always start with brute force
+•	Write recursion first
+•	Then memoize
+•	Then tabulate
+________________________________________
+If you want next, I can: ✅ Share 30 must solve DP problems
+✅ Create a daily DP practice sheet ✅ Explain DP patterns with visuals ✅ Solve a DP problem step by step with you
+Just tell me 👍
+Here’s a clear, beginner friendly 30 day Dynamic Programming (DP) practice plan that gradually builds intuition, patterns, and confidence—without overwhelming you.
+This plan assumes 1–2 hours/day and Python as the language.
+________________________________________
+🗓️ 30 Day Dynamic Programming Practice Plan (Beginner → Confident)
+✅ How to Use This Plan
+Every day:
+1.	Understand the problem pattern
+2.	Write a recursive solution
+3.	Add memoization
+4.	Convert to tabulation
+5.	(Optional) Do space optimization
+________________________________________
+🔰 WEEK 1: DP BASICS + 1D DP FOUNDATION
+Day 1 – DP Basics
+•	What is DP?
+•	Overlapping subproblems
+•	Optimal substructure
+✅ Practice:
+•	Fibonacci (recursive)
+•	Identify overlapping calls
+________________________________________
+Day 2 – Memoization
+•	Top down DP
+•	lru_cache
+✅ Problems:
+•	Fibonacci (memoized)
+•	Tribonacci
+________________________________________
+Day 3 – Tabulation
+•	Bottom up DP
+•	Iterative thinking
+✅ Problems:
+•	Fibonacci (tabulation)
+•	Climbing Stairs
+________________________________________
+Day 4 – 1D DP Pattern
+Pattern:
+dp[i] = best result till i
+✅ Problems:
+•	Min Cost Climbing Stairs
+•	Nth Stair with K steps
+________________________________________
+Day 5 – Choice Based 1D DP
+Pattern:
+Take or skip
+✅ Problems:
+•	House Robber
+•	House Robber II
+________________________________________
+Day 6 – Maximum Subarray
+✅ Problems:
+•	Maximum Subarray (Kadane)
+•	Best Time to Buy and Sell Stock
+________________________________________
+Day 7 – Revision + Rewrite
+✅ Do:
+•	Rewrite all Week 1 problems from memory
+•	Explain dp state out loud
+________________________________________
+🔷 WEEK 2: SUBSET & KNAPSACK PATTERNS (CORE INTERVIEW DP)
+________________________________________
+Day 8 – Subset Sum (Introduction)
+Pattern:
+dp[i][s] → can we make sum s using first i items?
+✅ Problems:
+•	Subset Sum
+•	Partition Equal Subset Sum
+________________________________________
+Day 9 – 0/1 Knapsack
+✅ Problems:
+•	0/1 Knapsack
+•	Target Sum
+________________________________________
+Day 10 – Count Subsets
+✅ Problems:
+•	Count of Subsets with Given Sum
+•	Target Sum (count ways)
+________________________________________
+Day 11 – Coin Change (Unbounded Knapsack)
+Pattern:
+•	Items can be reused
+✅ Problems:
+•	Coin Change (minimum coins)
+•	Coin Change II (number of ways)
+________________________________________
+Day 12 – Unbounded DP Variants
+✅ Problems:
+•	Rod Cutting
+•	Integer Break
+________________________________________
+Day 13 – Space Optimization
+✅ Practice:
+•	Convert 2D DP → 1D DP
+•	Coin Change optimized
+________________________________________
+Day 14 – Revision Day
+✅ Do:
+•	Re solve knapsack + coin change
+•	Draw DP tables manually
+________________________________________
+🧵 WEEK 3: STRING DP (IMPORTANT & TRICKY)
+________________________________________
+Day 15 – String DP Basics
+Pattern:
+dp[i][j] → answer for first i and j characters
+✅ Problem:
+•	Longest Common Subsequence (LCS)
+________________________________________
+Day 16 – LCS Variants
+✅ Problems:
+•	Longest Common Substring
+•	Shortest Common Supersequence
+________________________________________
+Day 17 – Palindrome DP
+✅ Problems:
+•	Longest Palindromic Subsequence
+•	Palindrome Partitioning (DP version)
+________________________________________
+Day 18 – Edit Distance
+✅ Problems:
+•	Edit Distance
+•	Delete Operation for Two Strings
+________________________________________
+Day 19 – Pattern Matching DP
+✅ Problems:
+•	Wildcard Matching
+•	Regular Expression Matching
+________________________________________
+Day 20 – String DP Revision
+✅ Do:
+•	Rewrite LCS & Edit Distance fully
+•	Memorize state meaning
+________________________________________
+Day 21 – Mixed Practice
+✅ Solve:
+•	2 string DP problems randomly
+•	Explain transitions
+________________________________________
+🧩 WEEK 4: GRID DP + ADVANCED THINKING
+________________________________________
+Day 22 – Grid DP Basics
+Pattern:
+dp[i][j] = top + left
+✅ Problems:
+•	Unique Paths
+•	Unique Paths II
+________________________________________
+Day 23 – Grid Optimization
+✅ Problems:
+•	Minimum Path Sum
+•	Triangle DP
+________________________________________
+Day 24 – Matrix DP
+✅ Problems:
+•	Maximum Square
+•	Dungeon Game
+________________________________________
+Day 25 – DP with Decisions
+✅ Problems:
+•	Jump Game
+•	Jump Game II
+________________________________________
+Day 26 – DP + Greedy Mix
+✅ Problems:
+•	Partition Array for Maximum Sum
+•	Job Scheduling
+________________________________________
+Day 27 – Hard DP Day
+✅ Try:
+•	Longest Increasing Subsequence (DP + binary search)
+•	Word Break
+________________________________________
+Day 28 – Full Revision
+✅ Redo:
+•	One problem from each DP pattern
+•	No help, no notes
+________________________________________
+Day 29 – Mock Interview Day
+✅ Simulate:
+•	Explain DP approach
+•	Dry run tables
+•	Write clean code
+________________________________________
+Day 30 – Confidence Day 🎯
+✅ Final Tasks:
+•	Solve 3 DP problems in 90 minutes
+•	Note patterns you recognize instantly
+________________________________________
+🧠 DP PATTERN CHECKLIST (Memorize This)
+✅ 1D DP
+✅ Take / Skip
+✅ Knapsack
+✅ Unbounded Knapsack
+✅ String DP
+✅ Grid DP
+________________________________________
+🎯 After 30 Days, You Will:
+✔ Understand DP patterns
+✔ Write DP state quickly
+✔ Convert recursion → DP
+✔ Solve interview DP questions
+________________________________________
+If you want, I can: ✅ Give LeetCode problem links day wise
+✅ Create a printable DP cheat sheet
+✅ Solve any day’s problem step by step with you
+Just tell me 😊
+Below is a clean, printable Dynamic Programming (DP) cheat sheet you can save as PDF or print directly.
+It’s designed for quick revision during interviews and practice—minimal text, maximum clarity.
+________________________________________
+🧠 Dynamic Programming (DP) Cheat Sheet – Python
+________________________________________
+✅ What Is Dynamic Programming?
+DP = Solving problems by breaking them into smaller overlapping subproblems and storing results.
+DP Works When:
+✔ Overlapping subproblems
+✔ Optimal substructure
+________________________________________
+🧩 Two Ways to Do DP
+1️⃣ Memoization (Top Down)
+•	Recursive
+•	Uses cache (dict / lru_cache)
+•	Easy to write
+from functools import lru_cache
+
+@lru_cache(None)
+def dp(i):
+    if i <= base:
+        return value
+    return dp(i-1) + dp(i-2)
+________________________________________
+2️⃣ Tabulation (Bottom Up)
+•	Iterative
+•	Fast and interview preferred
+dp = [0] * (n+1)
+dp[0] = base
+
+for i in range(1, n+1):
+    dp[i] = dp[i-1] + dp[i-2]
+________________________________________
+🧠 DP Thinking Framework (IMPORTANT)
+Before coding, answer:
+1.	What does dp[i] mean?
+2.	How to transition?
+3.	What are base cases?
+4.	Return final state
+________________________________________
+🔹 Core DP Patterns (Must Memorize)
+________________________________________
+✅ 1️⃣ 1D Linear DP
+Pattern
+dp[i] = best result till index i
+✅ Problems:
+•	Fibonacci
+•	Climbing Stairs
+•	House Robber
+•	Maximum Subarray
+dp[i] = max(dp[i-1], nums[i] + dp[i-2])
+________________________________________
+✅ 2️⃣ Take / Skip Pattern
+Decision DP
+✅ Problems:
+•	House Robber
+•	Subset problems
+take = nums[i] + dp[i-2]
+skip = dp[i-1]
+dp[i] = max(take, skip)
+________________________________________
+✅ 3️⃣ 0/1 Knapsack (Subset DP)
+Pattern
+dp[i][w] = max value using first i items with capacity w
+✅ Problems:
+•	0/1 Knapsack
+•	Partition Equal Subset
+•	Target Sum
+if wt[i-1] <= w:
+    dp[i][w] = max(val[i-1] + dp[i-1][w-wt[i-1]], dp[i-1][w])
+else:
+    dp[i][w] = dp[i-1][w]
+________________________________________
+✅ 4️⃣ Unbounded Knapsack
+(items can be reused)
+✅ Problems:
+•	Coin Change
+•	Rod Cutting
+dp[i][w] = max(val[i] + dp[i][w-wt[i]], dp[i-1][w])
+________________________________________
+✅ 5️⃣ String DP
+Pattern
+dp[i][j] = answer for first i chars and j chars
+✅ Problems:
+•	LCS
+•	Edit Distance
+•	Palindromic Subsequence
+if s1[i-1] == s2[j-1]:
+    dp[i][j] = 1 + dp[i-1][j-1]
+else:
+    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+________________________________________
+✅ 6️⃣ Grid DP
+Movement DP
+✅ Problems:
+•	Unique Paths
+•	Min Path Sum
+dp[i][j] = dp[i-1][j] + dp[i][j-1]
+________________________________________
+⚡ Space Optimization Trick
+If dp[i] depends only on previous values:
+✅ Replace array with variables
+prev2, prev1 = 0, 1
+for _ in range(2, n+1):
+    curr = prev1 + prev2
+    prev2 = prev1
+    prev1 = curr
+Space: O(1) ✅
+________________________________________
+🚦 Common DP Base Cases
+•	dp[0] = 0
+•	dp[1] = value
+•	Empty string → 0
+•	Out of bounds → ignore
+________________________________________
+⛔ Common DP Mistakes
+❌ Wrong dp definition
+❌ Missing base cases
+❌ Off by one errors
+❌ No memoization → TLE
+❌ Jumping to DP without recursion
+________________________________________
+🧪 Interview DP Strategy
+1️⃣ Write brute force
+2️⃣ Add memoization
+3️⃣ Convert to tabulation
+4️⃣ Optimize space (if asked)
+________________________________________
+🎯 DP Keywords → Use DP
+•	Maximum / Minimum
+•	Number of ways
+•	Longest / Shortest
+•	Optimal
+•	Can you partition?
+________________________________________
+✅ DP Master Checklist
+✔ Can define DP state quickly
+✔ Recognize pattern in <30 seconds
+✔ Convert recursion → DP
+✔ Optimize space confidently
+________________________________________
+🖨️ Printing Tips
+•	Copy → Paste into Word / Google Docs
+•	Use A4, Portrait
+•	Font: Consolas / Courier New
+•	Print as 1–2 pages
+________________________________________
+If you want, I can: ✅ Convert this into a PDF file ✅ Make a one page ultra compact version ✅ Add LeetCode problem references per pattern ✅ Create a DP formula sheet
+Just tell me 👍
+
