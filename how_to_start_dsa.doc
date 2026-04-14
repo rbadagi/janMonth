@@ -897,3 +897,83 @@ ________________________________________
 If you want, I can: ✅ Convert this into a PDF file ✅ Make a one page ultra compact version ✅ Add LeetCode problem references per pattern ✅ Create a DP formula sheet
 Just tell me 👍
 
+
+dynamic programming
+Dynamic Programming (DP) Cheat Sheet – Python
+What is DP?
+Dynamic Programming solves problems by breaking them into overlapping subproblems and storing results.
+Two Approaches
+Memoization (Top-Down): Recursive with cache.
+Tabulation (Bottom-Up): Iterative, interview preferred.
+DP Thinking Steps
+1. Define state (dp[i] meaning)
+2. Write recurrence
+3. Decide base cases
+4. Compute and return answer
+Core DP Patterns
+1D DP: dp[i] = best till i (Fibonacci, Climbing Stairs)
+
+Take / Skip: max(dp[i-1], value + dp[i-2])
+0/1 Knapsack: dp[i][w] choice based
+Unbounded Knapsack: reuse items (Coin Change)
+String DP: dp[i][j] for two strings (LCS, Edit Distance)
+Grid DP: dp[i][j] = from top + left
+Space Optimization
+If dp[i] depends only on earlier states, use variables instead of array.
+Common Mistakes
+- Wrong dp definition
+- Missing base cases
+- No memoization (TLE)
+When to Use DP?
+Keywords: Maximum, Minimum, Number of ways, Longest, Optimal
+Interview Strategy
+Brute force ® Memoization ® Tabulation ® Optimization
+
+leetcode programs
+Dynamic Programming (DP) Cheat Sheet – Python (with LeetCode References)
+1. 1D Linear DP
+Pattern: dp[i] = best result till i
+LeetCode:
+• 70. Climbing Stairs
+• 198. House Robber
+• 53. Maximum Subarray
+2. Take / Skip Pattern
+Decision-based DP
+LeetCode:
+• 198. House Robber
+• 213. House Robber II
+• 740. Delete and Earn
+
+3. 0/1 Knapsack (Subset DP)
+Pattern: dp[i][w] choice-based
+LeetCode:
+• 416. Partition Equal Subset Sum
+• 494. Target Sum
+• 474. Ones and Zeroes
+4. Unbounded Knapsack
+Items can be reused
+LeetCode:
+• 322. Coin Change
+• 518. Coin Change II
+• 343. Integer Break
+
+5. String DP
+Pattern: dp[i][j] for string prefixes
+LeetCode:
+• 1143. Longest Common Subsequence
+• 72. Edit Distance
+• 516. Longest Palindromic Subsequence
+
+6. Grid / Matrix DP
+Movement-based DP
+LeetCode:
+• 62. Unique Paths
+• 63. Unique Paths II
+• 64. Minimum Path Sum
+7. LIS Pattern
+Increasing subsequence DP
+LeetCode:
+• 300. Longest Increasing Subsequence
+• 673. Number of LIS
+Interview Tip
+Recognize the pattern first, then map to known LeetCode problems
