@@ -171,4 +171,20 @@ If you want:
 *   Two pointer + sliding window combination
 
 Tell me 👍
+
+pointer program--
+def remove_duplicates(nums):
+    slow = 0
+
+    for fast in range(1, len(nums)):
+        if nums[fast] != nums[slow]:
+            slow += 1
+            nums[slow] = nums[fast]
+
+    return nums[:slow + 1]
+
+arr = [1, 1, 2, 2, 3, 4, 4]
+de = remove_duplicates(arr)
+print(de)
+
 !!!
