@@ -1,0 +1,294 @@
+!!!stacks!!!
+Below is a **clear, interview‑oriented explanation** of **Stacks in DSA**, with **Python examples** and a list of **common interview programs**.
+
+***
+
+## 1. What is a Stack in DSA?
+
+A **stack** is a **linear data structure** that follows the principle:
+
+> **LIFO – Last In, First Out**
+
+Think of a stack of plates:
+
+*   You **add** a plate on top
+*   You **remove** a plate from the top
+
+You **cannot access** elements in the middle directly.
+
+***
+
+## 2. Basic Stack Operations
+
+| Operation    | Meaning                   |
+| ------------ | ------------------------- |
+| `push`       | Add an element to the top |
+| `pop`        | Remove the top element    |
+| `peek / top` | View the top element      |
+| `isEmpty`    | Check if stack is empty   |
+| `size`       | Number of elements        |
+
+All operations are **O(1)** time complexity.
+
+***
+
+## 3. Stack Implementation in Python
+
+### ✅ Using Python List (Most Common)
+
+```python
+stack = []
+
+# push
+stack.append(10)
+stack.append(20)
+stack.append(30)
+
+print(stack)  # [10, 20, 30]
+
+# pop
+top = stack.pop()
+print(top)    # 30
+print(stack)  # [10, 20]
+```
+
+👉 `append()` = push  
+👉 `pop()` = pop from top
+
+***
+
+### ✅ Using `collections.deque` (Preferred for interviews)
+
+```python
+from collections import deque
+
+stack = deque()
+
+stack.append(5)
+stack.append(15)
+stack.append(25)
+
+print(stack)  # deque([5, 15, 25])
+
+stack.pop()
+print(stack)  # deque([5, 15])
+```
+
+***
+
+### ✅ Custom Stack Implementation (Very Important for Interviews)
+
+```python
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        if self.is_empty():
+            return "Stack Underflow"
+        return self.items.pop()
+
+    def peek(self):
+        if self.is_empty():
+            return "Stack is empty"
+        return self.items[-1]
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def size(self):
+        return len(self.items)
+
+
+s = Stack()
+s.push(10)
+s.push(20)
+print(s.peek())  # 20
+print(s.pop())   # 20
+```
+
+***
+
+## 4. Why Are Stacks Used?
+
+Stacks are used when:
+
+*   You need **reverse order**
+*   You need to **track previous state**
+*   You need **nested structure handling**
+
+### Real‑Life Uses
+
+*   Undo / Redo operations
+*   Function calls (call stack)
+*   Expression evaluation
+*   Parenthesis checking
+*   Browser back button
+
+***
+
+## 5. Most Asked Stack Interview Programs ⚡
+
+Below are **VERY IMPORTANT** stack questions for interviews 👇
+
+***
+
+### ✅ 1. Check Balanced Parentheses
+
+**Input:** `{[()]}`  
+**Output:** Balanced ✅
+
+```python
+def is_balanced(s):
+    stack = []
+    mapping = {')': '(', '}': '{', ']': '['}
+
+    for char in s:
+        if char in mapping.values():
+            stack.append(char)
+        elif char in mapping:
+            if not stack or stack.pop() != mappingreturn False
+
+    return not stack
+
+print(is_balanced("{[()]}"))  # True
+```
+
+***
+
+### ✅ 2. Reverse a String Using Stack
+
+```python
+def reverse_string(s):
+    stack = []
+    for ch in s:
+        stack.append(ch)
+
+    reversed_str = ""
+    while stack:
+        reversed_str += stack.pop()
+
+    return reversed_str
+
+print(reverse_string("hello"))  # olleh
+```
+
+***
+
+### ✅ 3. Next Greater Element (NGE)
+
+**Input:** `[4, 5, 2, 25]`  
+**Output:** `[5, 25, 25, -1]`
+
+```python
+def next_greater(arr):
+    stack = []
+    result = [-1] * len(arr)
+
+    for i in range(len(arr)):
+        while stack and arr[i] > arr[stack[-1]]:
+            idx = stack.pop()
+            result[idx] = arr[i]
+        stack.append(i)
+
+    return result
+
+print(next_greater([4, 5, 2, 25]))
+```
+
+***
+
+### ✅ 4. Implement Stack Using Queue
+
+(Asked in Amazon, Microsoft)
+
+**Idea**: Use one queue
+
+```python
+from collections import deque
+
+class StackUsingQueue:
+    def __init__(self):
+        self.q = deque()
+
+    def push(self, x):
+        self.q.append(x)
+        for _ in range(len(self.q) - 1):
+            self.q.append(self.q.popleft())
+
+    def pop(self):
+        return self.q.popleft()
+```
+
+***
+
+### ✅ 5. Evaluate Postfix Expression
+
+**Expression:** `"231*+9-"`
+
+```python
+def evaluate_postfix(exp):
+    stack = []
+
+    for ch in exp:
+        if ch.isdigit():
+            stack.append(int(ch))
+        else:
+            b = stack.pop()
+            a = stack.pop()
+
+            if ch == '+': stack.append(a + b)
+            elif ch == '-': stack.append(a - b)
+            elif ch == '*': stack.append(a * b)
+            elif ch == '/': stack.append(a / b)
+
+    return stack[0]
+
+print(evaluate_postfix("231*+9-"))
+```
+
+***
+
+### ✅ 6. Largest Rectangle in Histogram (Advanced – FAANG)
+
+This problem **heavily relies on stack** and is **very common**.
+
+(If you want, I can explain this step‑by‑step.)
+
+***
+
+## 6. Stack Interview Tips ✅
+
+✅ Always mention **LIFO**  
+✅ Explain **why stack is used**  
+✅ Write clean code  
+✅ Handle edge cases (empty stack)  
+✅ State time complexity
+
+***
+
+## 7. Summary
+
+*   Stack = **LIFO data structure**
+*   Fast operations (**O(1)**)
+*   Implemented using **list / deque**
+*   Extremely important for **DSA interviews**
+*   Commonly used in:
+    *   Parsing
+    *   Expression evaluation
+    *   Undo/Redo
+    *   Recursion
+
+***
+
+If you want, I can next help you with:
+✔ Stack tricky problems  
+✔ Step‑by‑step dry runs  
+✔ Interview questions + answers  
+✔ Compare Stack vs Queue
+
+Just tell me 👍
+!!!
