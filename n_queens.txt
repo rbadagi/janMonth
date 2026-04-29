@@ -1,0 +1,255 @@
+#####n-queen-examples
+Below is a **clear, step‑by‑step explanation of the N‑Queens problem**, exactly the way interviewers expect you to think and explain it.
+
+***
+
+# ✅ N‑Queens Problem — Step‑by‑Step Explanation
+
+## 1. Problem Statement (Understand First)
+
+You are given an **N × N chessboard**.  
+Your task is to **place N queens** such that:
+
+A queen **cannot attack** another queen.
+
+### A queen attacks:
+
+*   Same **row**
+*   Same **column**
+*   Same **diagonal**
+
+👉 Output **all possible valid arrangements**.
+
+***
+
+## 2. Key Observation (Very Important)
+
+✅ We place **only one queen per row**
+
+Why?
+
+*   If we place one queen in each row, **row conflicts are automatically avoided**
+
+So now we only need to check:
+
+*   Column conflict
+*   Diagonal conflict
+
+***
+
+## 3. Strategy: Backtracking
+
+We place queens **row by row**:
+
+1.  Start from row 0
+2.  Try placing a queen in every column of that row
+3.  Check if the placement is safe
+4.  If safe → place the queen & move to the next row
+5.  If not safe → try next column
+6.  If no column works → **backtrack**
+
+***
+
+## 4. How Do We Check “Safe”?
+
+Assume we want to place a queen at **(row, col)**
+
+We check **previous rows only**, because future rows are empty.
+
+### 1️⃣ Column check
+
+No queen should be in the same column.
+
+    if col is already used → NOT SAFE
+
+***
+
+### 2️⃣ Left diagonal check (↖)
+
+Cells where:
+
+    row - col is same
+
+***
+
+### 3️⃣ Right diagonal check (↗)
+
+Cells where:
+
+    row + col is same
+
+***
+
+## 5. Data Structures Used
+
+To make checks fast (**O(1)**):
+
+```text
+cols[col]           → is column occupied?
+diag1[row - col]    → left diagonal
+diag2[row + col]    → right diagonal
+```
+
+***
+
+## 6. Step-by-Step Example: N = 4
+
+### Step 1️⃣ Row 0
+
+Try columns one by one.
+
+✅ Place queen at (0,1)
+
+    . Q . .
+    . . . .
+    . . . .
+    . . . .
+
+***
+
+### Step 2️⃣ Row 1
+
+Try columns:
+
+*   Column 0 → diagonal conflict ❌
+*   Column 1 → column conflict ❌
+*   Column 2 → diagonal conflict ❌
+*   Column 3 → ✅ valid
+
+Place at (1,3)
+
+    . Q . .
+    . . . Q
+    . . . .
+    . . . .
+
+***
+
+### Step 3️⃣ Row 2
+
+Try columns:
+
+*   Column 0 → ✅ valid
+
+<!---->
+
+    . Q . .
+    . . . Q
+    Q . . .
+    . . . .
+
+***
+
+### Step 4️⃣ Row 3
+
+Try columns:
+
+*   All columns cause conflict ❌
+
+👉 **Dead end** → BACKTRACK
+
+***
+
+### Step 5️⃣ Backtracking Happens
+
+Remove queen from (2,0)
+
+Try other positions in row 2  
+If none work → backtrack row 1  
+Continue until a valid placement is found
+
+***
+
+## 7. Base Condition (Very Important)
+
+```python
+if row == N:
+    solution found
+```
+
+This means:
+✅ We have successfully placed N queens
+
+***
+
+## 8. Complete Python Code (Interview‑Ready)
+
+```python
+def solveNQueens(n):
+    board = [["." for _ in range(n)] for _ in range(n)]
+    cols = set()
+    diag1 = set()  # row - col
+    diag2 = set()  # row + col
+    result = []
+
+    def backtrack(row):
+        if row == n:
+            result.append(["".join(r) for r in board])
+            return
+
+        for col in range(n):
+            if col in cols or (row - col) in diag1 or (row + col) in diag2:
+                continue
+
+            # place queen
+            board[row][col] = "Q"
+            cols.add(col)
+            diag1.add(row - col)
+            diag2.add(row + col)
+
+            backtrack(row + 1)
+
+            # remove queen (backtrack)
+            board[row][col] = "."
+            cols.remove(col)
+            diag1.remove(row - col)
+            diag2.remove(row + col)
+
+    backtrack(0)
+    return result
+```
+
+***
+
+## 9. Time & Space Complexity (Interview Expected Answer)
+
+### ⏱ Time Complexity
+
+*   **O(N!)** (worst case)
+*   Because we try all column combinations with pruning
+
+### 💾 Space Complexity
+
+*   **O(N)** recursion stack
+*   Additional sets for columns & diagonals
+
+***
+
+## 10. How to Explain This in an Interview (Perfect Answer)
+
+> “I use backtracking. I place one queen per row and try all columns.  
+> Before placing, I check column and diagonal conflicts using hash sets.  
+> If the placement is invalid, I backtrack and try the next option.”
+
+✅ This is exactly what interviewers want to hear.
+
+***
+
+## 11. Key Takeaways
+
+✅ Classic backtracking problem  
+✅ Tests recursion + constraints  
+✅ Optimized using sets  
+✅ Common in FAANG interviews
+
+***
+
+If you want next:
+
+*   🔍 **Recursion tree visualization**
+*   🧠 **Dry run in interview style**
+*   ⚡ **Optimized version explanation**
+*   ❌ **Common mistakes candidates make**
+
+Just tell me 👍
+!!!!!
