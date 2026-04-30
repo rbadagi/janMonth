@@ -1,0 +1,361 @@
+!!!!!!!DFS Programs
+Below are **common DFS (Depth-First Search) interview programs**, ordered from **basic to advanced**, with **clear explanations** and **clean code**.  
+(Examples mainly in **Python**, since it’s widely accepted; logic is language‑independent.)
+
+***
+
+## 1️⃣ DFS Traversal of a Graph (Recursive)
+
+**Classic starter problem**
+
+```python
+def dfs(graph, start, visited=set()):
+    visited.add(start)
+    print(start, end=" ")
+
+    for neighbor in graphif neighbor not in visited:
+            dfs(graph, neighbor, visited)
+
+
+graph = {
+    0: [1, 2],
+    1: [3],
+    2: [4],
+    3: [],
+    4: []
+}
+
+dfs(graph, 0)
+```
+
+✅ **Tests:** recursion, visited set  
+✅ **Asked in:** Freshers, mid-level
+
+***
+
+## 2️⃣ DFS Using Stack (Iterative)
+
+**Avoid recursion stack overflow**
+
+```python
+def dfs_iterative(graph, start):
+    visited = set()
+    stack = [start]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            print(node, end=" ")
+            stack.extend(graph[node])
+
+
+dfs_iterative(graph, 0)
+```
+
+✅ **Tests:** stack usage  
+✅ **Key difference:** manual stack control
+
+***
+
+## 3️⃣ DFS on Binary Tree (Inorder Traversal)
+
+```python
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def inorder(root):
+    if not root:
+        return
+    inorder(root.left)
+    print(root.val, end=" ")
+    inorder(root.right)
+```
+
+✅ **DFS Types:** Preorder, Inorder, Postorder  
+✅ **Very common interview question**
+
+***
+
+## 4️⃣ Maximum Depth of Binary Tree ⭐
+
+**Very popular depth‑based question**
+
+```python
+def maxDepth(root):
+    if not root:
+        return 0
+    return 1 + max(maxDepth(root.left), maxDepth(root.right))
+```
+
+✅ **Tests:** recursion + depth calculation  
+✅ **Asked in:** Amazon, Microsoft, Google
+
+***
+
+## 5️⃣ Count Connected Components (DFS)
+
+```python
+def count_components(n, edges):
+    graph = {i: [] for i in range(n)}
+    for u, v in edges:
+        graph[u].append(v)
+        graph[v].append(u)
+
+    visited = set()
+    count = 0
+
+    def dfs(node):
+        visited.add(node)
+        for nei in graphif nei not in visited:
+                dfs(nei)
+
+    for i in range(n):
+        if i not in visited:
+            dfs(i)
+            count += 1
+
+    return count
+```
+
+✅ **Tests:** graph traversal depth  
+✅ **Used in:** network / clustering problems
+
+***
+
+## 6️⃣ Path Existence Between Two Nodes (DFS)
+
+```python
+def hasPath(graph, src, dst, visited=set()):
+    if src == dst:
+        return True
+
+    visited.add(src)
+
+    for neighbor in graphif neighbor not in visited:
+            if hasPath(graph, neighbor, dst, visited):
+                return True
+
+    return False
+```
+
+✅ **Tests:** backtracking + recursion  
+✅ **Good follow‑up question**
+
+***
+
+## 7️⃣ DFS Backtracking – All Paths (Advanced)
+
+```python
+def allPaths(graph, start, target):
+    result = []
+
+    def dfs(node, path):
+        if node == target:
+            result.append(path[:])
+            return
+
+        for nei in graphpath.append(nei)
+            dfs(nei, path)
+            path.pop()
+
+    dfs(start, [start])
+    return result
+```
+
+✅ **Tests:** depth + backtracking  
+✅ **Asked in:** hard interviews
+
+***
+
+## 8️⃣ Detect Cycle in Graph (DFS)
+
+```python
+def hasCycle(graph):
+    visited = set()
+    recStack = set()
+
+    def dfs(v):
+        visited.add(v)
+        recStack.add(v)
+
+        for nei in graphif nei not in visited:
+                if dfs(nei):
+                    return True
+            elif nei in recStack:
+                return True
+
+        recStack.remove(v)
+        return False
+
+    for node in graph:
+        if node not in visited:
+            if dfs(node):
+                return True
+    return False
+```
+
+✅ **Tests:** recursion stack tracking  
+✅ **Very important concept**
+
+***
+
+## 🔥 DFS Interview Tips
+
+*   **DFS = recursion or stack**
+*   Always explain:
+    *   Base case
+    *   Visited tracking
+    *   Backtracking step
+*   Time Complexity: `O(V + E)`
+*   Space: recursion depth or stack
+
+***
+
+### Want this in **Java / C++** or want **LeetCode-style DFS problems list**?
+
+Tell me 👍
+
+Here is a **curated list of DFS problems from LeetCode**, **grouped by DFS depth usage and interview frequency**. These are the exact problems commonly expected in **technical interviews**.
+
+***
+
+## 🔰 Beginner DFS (Must‑Do)
+
+These build DFS fundamentals.
+
+1.  **LeetCode 200 – Number of Islands**
+    *   DFS flood fill
+    *   Grid traversal
+    *   ⭐ Very frequently asked
+
+2.  **LeetCode 695 – Max Area of Island**
+    *   DFS + counting depth
+    *   Variation of Number of Islands
+
+3.  **LeetCode 733 – Flood Fill**
+    *   DFS coloring
+    *   Simple recursion base case
+
+4.  **LeetCode 463 – Island Perimeter**
+    *   DFS with boundary conditions
+
+***
+
+## 🌳 DFS on Trees (EXTREMELY IMPORTANT)
+
+Tree DFS questions appear in almost every interview.
+
+5.  **LeetCode 104 – Maximum Depth of Binary Tree**
+    *   Pure depth-based DFS
+    *   ⭐ Top interview question
+
+6.  **LeetCode 111 – Minimum Depth of Binary Tree**
+
+7.  **LeetCode 100 – Same Tree**
+    *   DFS comparison
+
+8.  **LeetCode 101 – Symmetric Tree**
+    *   DFS with mirror logic
+
+9.  **LeetCode 112 – Path Sum**
+    *   Root → Leaf DFS
+
+10. **LeetCode 113 – Path Sum II**
+
+*   DFS + backtracking
+
+***
+
+## 🔁 Graph DFS (Visited + Recursion Stack)
+
+Key for system design & networks.
+
+11. **LeetCode 133 – Clone Graph**
+    *   DFS graph cloning
+    *   HashMap + recursion
+
+12. **LeetCode 207 – Course Schedule**
+    *   Cycle detection using DFS
+    *   🔥 Interview favorite
+
+13. **LeetCode 210 – Course Schedule II**
+    *   DFS + topological sort
+
+14. **LeetCode 841 – Keys and Rooms**
+    *   DFS reachability
+
+***
+
+## 🧭 Backtracking + DFS (Medium → Hard)
+
+These test recursion depth + undo logic.
+
+15. **LeetCode 797 – All Paths From Source to Target**
+    *   DFS path tracking
+    *   ⭐ Often asked
+
+16. **LeetCode 78 – Subsets**
+    *   DFS recursion tree
+
+17. **LeetCode 46 – Permutations**
+    *   DFS + visited array
+
+18. **LeetCode 39 – Combination Sum**
+    *   DFS backtracking
+
+***
+
+## 🔥 Advanced DFS (Strong Candidates)
+
+Seen in senior/final interview rounds.
+
+19. **LeetCode 124 – Binary Tree Maximum Path Sum**
+    *   DFS with global variable
+
+20. **LeetCode 543 – Diameter of Binary Tree**
+    *   DFS depth calculation
+
+21. **LeetCode 329 – Longest Increasing Path in a Matrix**
+    *   DFS + memoization (DP)
+
+22. **LeetCode 827 – Making A Large Island**
+    *   DFS + labeling islands
+
+***
+
+## 📌 DFS Depth Interview Pattern
+
+Interviewers usually test:
+
+*   ✅ Recursive depth calculation
+*   ✅ Visited / path handling
+*   ✅ Base case correctness
+*   ✅ Backtracking (add → remove)
+
+***
+
+## ✅ Recommended DFS Practice Order
+
+If preparing for interviews, follow this order:
+
+1.  200 → 695 → 733
+2.  104 → 112 → 113
+3.  207 → 210
+4.  797 → 46 → 39
+5.  124 → 329
+
+***
+
+If you want:
+
+*   ✅ **Java / C++ DFS solutions**
+*   ✅ **Top 10 DFS interview questions only**
+*   ✅ **DFS vs BFS comparison for interviews**
+
+Tell me what you want next 👌
+!!!!!!!
