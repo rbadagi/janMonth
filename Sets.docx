@@ -1,0 +1,586 @@
+Sets KT
+# Python Set Functions - Complete Reference
+
+---
+
+## 1. Creating Sets
+
+```python
+# Empty set (must use set(), not {})
+empty = set()
+
+# With elements
+fruits = {"apple", "banana", "cherry"}
+numbers = {1, 2, 3, 4, 5}
+
+# From other iterables
+from_list = set([1, 2, 3, 2, 1])      # {1, 2, 3}
+from_tuple = set((1, 2, 3))            # {1, 2, 3}
+from_string = set("hello")             # {'h', 'e', 'l', 'o'}
+from_range = set(range(5))             # {0, 1, 2, 3, 4}
+
+# Set comprehension
+squares = {x**2 for x in range(1, 6)}  # {1, 4, 9, 16, 25}
+
+# Frozen set (immutable set)
+frozen = frozenset([1, 2, 3, 4, 5])
+```
+
+---
+
+## 2. Adding Elements
+
+### add()
+Adds a single element to the set. No effect if element already exists.
+```python
+fruits = {"apple", "banana"}
+fruits.add("cherry")
+print(fruits)  # {'apple', 'banana', 'cherry'}
+
+# Adding duplicate - no effect
+fruits.add("banana")
+print(fruits)  # {'apple', 'banana', 'cherry'}
+```
+
+### update()
+Adds multiple elements from an iterable (union in place).
+```python
+fruits = {"apple", "banana"}
+fruits.update(["cherry", "date"])
+print(fruits)  # {'apple', 'banana', 'cherry', 'date'}
+
+# Multiple iterables
+fruits.update(["elderberry"], ("fig",), {"grape"})
+print(fruits)  # {'apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape'}
+
+# From string (adds each character)
+letters = set()
+letters.update("hello")
+print(letters)  # {'h', 'e', 'l', 'o'}
+```
+
+---
+
+## 3. Removing Elements
+
+### remove()
+Removes a specified element. Raises KeyError if not found.
+```python
+fruits = {"apple", "banana", "cherry"}
+fruits.remove("banana")
+print(fruits)  # {'apple', 'cherry'}
+
+# fruits.remove("grape")  # KeyError: 'grape'
+```
+
+### discard()
+Removes a specified element. Does NOT raise error if not found.
+```python
+fruits = {"apple", "banana", "cherry"}
+fruits.discard("banana")
+print(fruits)  # {'apple', 'cherry'}
+
+# No error if element doesn't exist
+fruits.discard("grape")
+print(fruits)  # {'apple', 'cherry'}
+```
+
+### pop()
+Removes and returns an arbitrary element. Raises KeyError if set is empty.
+```python
+fruits = {"apple", "banana", "cherry"}
+removed = fruits.pop()
+print(removed)  # random element (e.g., 'apple')
+print(fruits)   # remaining elements
+
+# empty_set = set()
+# empty_set.pop()  # KeyError: 'pop from an empty set'
+```
+
+### clear()
+Removes all elements from the set.
+```python
+fruits = {"apple", "banana", "cherry"}
+fruits.clear()
+print(fruits)  # set()
+```
+
+---
+
+## 4. Set Operations (Mathematical)
+
+### union() or |
+Returns a new set with all elements from both sets.
+```python
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+print(set1.union(set2))   # {1, 2, 3, 4, 5, 6}
+print(set1 | set2)        # {1, 2, 3, 4, 5, 6}
+
+# Multiple sets
+set3 = {7, 8}
+print(set1.union(set2, set3))  # {1, 2, 3, 4, 5, 6, 7, 8}
+print(set1 | set2 | set3)     # {1, 2, 3, 4, 5, 6, 7, 8}
+```
+
+### intersection() or &
+Returns a new set with elements common to both sets.
+```python
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+print(set1.intersection(set2))  # {3, 4}
+print(set1 & set2)              # {3, 4}
+
+# Multiple sets
+set3 = {3, 4, 7, 8}
+print(set1.intersection(set2, set3))  # {3, 4}
+print(set1 & set2 & set3)            # {3, 4}
+```
+
+### difference() or -
+Returns a new set with elements in the first set but not in the second.
+```python
+set1 = {1, 2, 3, 4, 5}
+set2 = {3, 4, 5, 6, 7}
+
+print(set1.difference(set2))  # {1, 2}
+print(set1 - set2)            # {1, 2}
+print(set2 - set1)            # {6, 7}
+
+# Multiple sets
+set3 = {1, 8, 9}
+print(set1.difference(set2, set3))  # {2}
+print(set1 - set2 - set3)          # {2}
+```
+
+### symmetric_difference() or ^
+Returns a new set with elements in either set, but not in both.
+```python
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+print(set1.symmetric_difference(set2))  # {1, 2, 5, 6}
+print(set1 ^ set2)                      # {1, 2, 5, 6}
+```
+
+---
+
+## 5. Set Update Operations (In-Place)
+
+### update() or |=
+Updates the set with the union.
+```python
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+set1.update(set2)
+print(set1)  # {1, 2, 3, 4, 5}
+
+# Using operator
+set1 = {1, 2, 3}
+set1 |= {3, 4, 5}
+print(set1)  # {1, 2, 3, 4, 5}
+```
+
+### intersection_update() or &=
+Updates the set keeping only common elements.
+```python
+set1 = {1, 2, 3, 4, 5}
+set2 = {3, 4, 5, 6, 7}
+set1.intersection_update(set2)
+print(set1)  # {3, 4, 5}
+
+# Using operator
+set1 = {1, 2, 3, 4, 5}
+set1 &= {3, 4, 5, 6, 7}
+print(set1)  # {3, 4, 5}
+```
+
+### difference_update() or -=
+Removes elements found in another set.
+```python
+set1 = {1, 2, 3, 4, 5}
+set2 = {3, 4, 5, 6, 7}
+set1.difference_update(set2)
+print(set1)  # {1, 2}
+
+# Using operator
+set1 = {1, 2, 3, 4, 5}
+set1 -= {3, 4, 5, 6, 7}
+print(set1)  # {1, 2}
+```
+
+### symmetric_difference_update() or ^=
+Updates the set with symmetric difference.
+```python
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+set1.symmetric_difference_update(set2)
+print(set1)  # {1, 2, 5, 6}
+
+# Using operator
+set1 = {1, 2, 3, 4}
+set1 ^= {3, 4, 5, 6}
+print(set1)  # {1, 2, 5, 6}
+```
+
+---
+
+## 6. Set Comparison Methods
+
+### issubset() or <=
+Returns True if all elements of the set are in another set.
+```python
+set1 = {1, 2, 3}
+set2 = {1, 2, 3, 4, 5}
+
+print(set1.issubset(set2))  # True
+print(set1 <= set2)         # True
+print(set2.issubset(set1))  # False
+
+# Proper subset (strict) - <
+print(set1 < set2)   # True (set1 is a proper subset)
+print(set1 < set1)   # False (not a proper subset of itself)
+```
+
+### issuperset() or >=
+Returns True if the set contains all elements of another set.
+```python
+set1 = {1, 2, 3, 4, 5}
+set2 = {1, 2, 3}
+
+print(set1.issuperset(set2))  # True
+print(set1 >= set2)           # True
+print(set2.issuperset(set1))  # False
+
+# Proper superset (strict) - >
+print(set1 > set2)   # True (set1 is a proper superset)
+print(set1 > set1)   # False (not a proper superset of itself)
+```
+
+### isdisjoint()
+Returns True if two sets have no common elements.
+```python
+set1 = {1, 2, 3}
+set2 = {4, 5, 6}
+set3 = {3, 4, 5}
+
+print(set1.isdisjoint(set2))  # True (no common elements)
+print(set1.isdisjoint(set3))  # False (3 is common)
+```
+
+---
+
+## 7. Copying Sets
+
+### copy()
+Returns a shallow copy of the set.
+```python
+original = {1, 2, 3, 4, 5}
+copied = original.copy()
+copied.add(6)
+print(original)  # {1, 2, 3, 4, 5} (unchanged)
+print(copied)    # {1, 2, 3, 4, 5, 6}
+```
+
+### set() constructor
+```python
+original = {1, 2, 3, 4, 5}
+copied = set(original)
+```
+
+---
+
+## 8. Built-in Functions for Sets
+
+### len()
+Returns the number of elements in the set.
+```python
+fruits = {"apple", "banana", "cherry"}
+print(len(fruits))  # 3
+```
+
+### max()
+Returns the largest element.
+```python
+numbers = {10, 45, 3, 78, 22}
+print(max(numbers))  # 78
+
+words = {"apple", "banana", "cherry"}
+print(max(words))  # cherry
+```
+
+### min()
+Returns the smallest element.
+```python
+numbers = {10, 45, 3, 78, 22}
+print(min(numbers))  # 3
+
+words = {"apple", "banana", "cherry"}
+print(min(words))  # apple
+```
+
+### sum()
+Returns the sum of all elements.
+```python
+numbers = {10, 20, 30, 40, 50}
+print(sum(numbers))       # 150
+print(sum(numbers, 100))  # 250 (with start value)
+```
+
+### sorted()
+Returns a new sorted list from the set elements.
+```python
+numbers = {45, 12, 78, 3, 56}
+print(sorted(numbers))               # [3, 12, 45, 56, 78]
+print(sorted(numbers, reverse=True))  # [78, 56, 45, 12, 3]
+
+words = {"banana", "Apple", "cherry"}
+print(sorted(words, key=str.lower))  # ['Apple', 'banana', 'cherry']
+```
+
+### any()
+Returns True if any element is True.
+```python
+print(any({False, False, True}))   # True
+print(any({False, False, False}))  # False
+print(any({0, 0, 1}))             # True
+print(any(set()))                   # False
+```
+
+### all()
+Returns True if all elements are True.
+```python
+print(all({True, True, True}))    # True
+print(all({True, False, True}))   # False
+print(all({1, 2, 3}))            # True
+print(all(set()))                  # True
+```
+
+### enumerate()
+Returns index-value pairs (order not guaranteed).
+```python
+fruits = {"apple", "banana", "cherry"}
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+# 0: cherry (order may vary)
+# 1: banana
+# 2: apple
+```
+
+### map()
+Applies a function to each element.
+```python
+numbers = {1, 2, 3, 4, 5}
+squared = set(map(lambda x: x**2, numbers))
+print(squared)  # {1, 4, 9, 16, 25}
+
+words = {"hello", "world"}
+upper_words = set(map(str.upper, words))
+print(upper_words)  # {'HELLO', 'WORLD'}
+```
+
+### filter()
+Filters elements based on a condition.
+```python
+numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+evens = set(filter(lambda x: x % 2 == 0, numbers))
+print(evens)  # {2, 4, 6, 8, 10}
+```
+
+### type()
+Returns the type of the object.
+```python
+s = {1, 2, 3}
+print(type(s))  # <class 'set'>
+```
+
+---
+
+## 9. Set Membership and Operations
+
+### Membership (in / not in)
+```python
+fruits = {"apple", "banana", "cherry"}
+print("banana" in fruits)      # True
+print("grape" not in fruits)   # True
+print("grape" in fruits)       # False
+```
+
+### Iteration
+```python
+fruits = {"apple", "banana", "cherry"}
+for fruit in fruits:
+    print(fruit)
+# apple (order may vary)
+# banana
+# cherry
+```
+
+### Equality (== / !=)
+```python
+set1 = {1, 2, 3}
+set2 = {3, 2, 1}
+set3 = {1, 2, 4}
+
+print(set1 == set2)  # True (order doesn't matter)
+print(set1 != set3)  # True
+```
+
+---
+
+## 10. Set Comprehensions
+
+### Basic Comprehension
+```python
+squares = {x**2 for x in range(1, 6)}
+print(squares)  # {1, 4, 9, 16, 25}
+```
+
+### With Condition
+```python
+evens = {x for x in range(20) if x % 2 == 0}
+print(evens)  # {0, 2, 4, 6, 8, 10, 12, 14, 16, 18}
+```
+
+### From String
+```python
+vowels = {char for char in "hello world" if char in "aeiou"}
+print(vowels)  # {'e', 'o'}
+```
+
+### With Function
+```python
+words = ["hello", "world", "hello", "python", "world"]
+unique_upper = {w.upper() for w in words}
+print(unique_upper)  # {'HELLO', 'WORLD', 'PYTHON'}
+```
+
+---
+
+## 11. Frozen Sets (Immutable Sets)
+
+```python
+# Creating frozen sets
+frozen = frozenset([1, 2, 3, 4, 5])
+print(frozen)  # frozenset({1, 2, 3, 4, 5})
+
+# Frozen sets support all read operations
+print(len(frozen))           # 5
+print(3 in frozen)           # True
+print(frozen.issubset({1, 2, 3, 4, 5, 6}))  # True
+
+# Set operations return new frozensets
+frozen1 = frozenset([1, 2, 3])
+frozen2 = frozenset([3, 4, 5])
+print(frozen1 | frozen2)     # frozenset({1, 2, 3, 4, 5})
+print(frozen1 & frozen2)     # frozenset({3})
+print(frozen1 - frozen2)     # frozenset({1, 2})
+
+# Cannot modify frozen sets
+# frozen.add(6)      # AttributeError
+# frozen.remove(1)   # AttributeError
+
+# Frozen sets can be used as dictionary keys or set elements
+nested_set = {frozenset([1, 2]), frozenset([3, 4])}
+print(nested_set)  # {frozenset({1, 2}), frozenset({3, 4})}
+
+dict_with_frozen = {frozenset([1, 2]): "pair1", frozenset([3, 4]): "pair2"}
+print(dict_with_frozen[frozenset([1, 2])])  # pair1
+```
+
+---
+
+## 12. Practical Use Cases
+
+### Removing Duplicates from a List
+```python
+numbers = [1, 2, 3, 2, 4, 3, 5, 1, 6]
+unique = list(set(numbers))
+print(unique)  # [1, 2, 3, 4, 5, 6] (order may vary)
+
+# Preserving order
+unique_ordered = list(dict.fromkeys(numbers))
+print(unique_ordered)  # [1, 2, 3, 4, 5, 6]
+```
+
+### Finding Common Elements Between Lists
+```python
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+common = list(set(list1) & set(list2))
+print(common)  # [4, 5]
+```
+
+### Finding Unique Elements
+```python
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+only_in_list1 = list(set(list1) - set(list2))
+print(only_in_list1)  # [1, 2, 3]
+```
+
+### Checking for Common Characters
+```python
+word1 = "hello"
+word2 = "world"
+common_chars = set(word1) & set(word2)
+print(common_chars)  # {'l', 'o'}
+```
+
+### Counting Unique Elements
+```python
+text = "hello world python programming"
+unique_chars = set(text.replace(" ", ""))
+print(f"Unique characters: {len(unique_chars)}")  # Unique characters: 16
+```
+
+### Validating Input Against Allowed Values
+```python
+allowed = {"admin", "user", "moderator"}
+role = "admin"
+if role in allowed:
+    print(f"Valid role: {role}")
+else:
+    print("Invalid role")
+```
+
+---
+
+## Quick Reference Table
+
+| Method/Function | Description |
+|----------------|-------------|
+| add(x) | Add element x |
+| update(iterable) | Add multiple elements |
+| remove(x) | Remove x (raises KeyError if not found) |
+| discard(x) | Remove x (no error if not found) |
+| pop() | Remove and return arbitrary element |
+| clear() | Remove all elements |
+| copy() | Return shallow copy |
+| union(set2) or \| | All elements from both sets |
+| intersection(set2) or & | Common elements |
+| difference(set2) or - | Elements in set1 but not set2 |
+| symmetric_difference(set2) or ^ | Elements in either but not both |
+| update(set2) or \|= | Union in place |
+| intersection_update(set2) or &= | Intersection in place |
+| difference_update(set2) or -= | Difference in place |
+| symmetric_difference_update(set2) or ^= | Symmetric difference in place |
+| issubset(set2) or <= | Check if subset |
+| issuperset(set2) or >= | Check if superset |
+| isdisjoint(set2) | Check if no common elements |
+| len(set) | Number of elements |
+| max(set) | Largest element |
+| min(set) | Smallest element |
+| sum(set) | Sum of elements |
+| sorted(set) | Return sorted list |
+| any(set) | True if any element is True |
+| all(set) | True if all elements are True |
+| in (membership) | Check if element exists |
+| frozenset() | Create immutable set |
+
+---
+
+*Document created for Python 3.x*
+
