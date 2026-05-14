@@ -1,0 +1,539 @@
+Strings KT
+# Python String Functions - Complete Reference
+
+---
+
+## 1. Case Conversion Methods
+
+### upper()
+Converts all characters to uppercase.
+```python
+text = "hello world"
+print(text.upper())  # HELLO WORLD
+```
+
+### lower()
+Converts all characters to lowercase.
+```python
+text = "HELLO WORLD"
+print(text.lower())  # hello world
+```
+
+### title()
+Converts first character of each word to uppercase.
+```python
+text = "hello world python"
+print(text.title())  # Hello World Python
+```
+
+### capitalize()
+Converts first character of the string to uppercase.
+```python
+text = "hello world"
+print(text.capitalize())  # Hello world
+```
+
+### swapcase()
+Swaps uppercase to lowercase and vice versa.
+```python
+text = "Hello World"
+print(text.swapcase())  # hELLO wORLD
+```
+
+### casefold()
+Aggressive lowercase (handles special characters better than lower()).
+```python
+text = "HELLO StraC¬e"
+print(text.casefold())  # hello strasse
+```
+
+---
+
+## 2. Search and Find Methods
+
+### find()
+Returns the index of the first occurrence of a substring. Returns -1 if not found.
+```python
+text = "Hello World"
+print(text.find("World"))  # 6
+print(text.find("xyz"))    # -1
+```
+
+### rfind()
+Returns the index of the last occurrence of a substring.
+```python
+text = "hello world hello"
+print(text.rfind("hello"))  # 12
+```
+
+### index()
+Same as find(), but raises ValueError if not found.
+```python
+text = "Hello World"
+print(text.index("World"))  # 6
+# text.index("xyz")  # ValueError!
+```
+
+### rindex()
+Same as rfind(), but raises ValueError if not found.
+```python
+text = "hello world hello"
+print(text.rindex("hello"))  # 12
+```
+
+### count()
+Returns the number of occurrences of a substring.
+```python
+text = "hello world hello python hello"
+print(text.count("hello"))  # 3
+```
+
+---
+
+## 3. Validation/Check Methods (return True/False)
+
+### startswith()
+Checks if string starts with a specified prefix.
+```python
+text = "Hello World"
+print(text.startswith("Hello"))  # True
+print(text.startswith("World"))  # False
+```
+
+### endswith()
+Checks if string ends with a specified suffix.
+```python
+text = "document.pdf"
+print(text.endswith(".pdf"))   # True
+print(text.endswith(".txt"))   # False
+```
+
+### isalpha()
+Returns True if all characters are alphabetic.
+```python
+print("Hello".isalpha())    # True
+print("Hello1".isalpha())   # False
+print("Hello ".isalpha())   # False
+```
+
+### isdigit()
+Returns True if all characters are digits.
+```python
+print("12345".isdigit())   # True
+print("123.45".isdigit())  # False
+```
+
+### isnumeric()
+Returns True if all characters are numeric (includes digits, fractions, etc.).
+```python
+print("12345".isnumeric())  # True
+print("B=".isnumeric())      # True
+print("12.5".isnumeric())   # False
+```
+
+### isdecimal()
+Returns True if all characters are decimal characters.
+```python
+print("12345".isdecimal())  # True
+print("B=".isdecimal())      # False
+```
+
+### isalnum()
+Returns True if all characters are alphanumeric.
+```python
+print("Hello123".isalnum())   # True
+print("Hello 123".isalnum())  # False
+```
+
+### isspace()
+Returns True if all characters are whitespace.
+```python
+print("   ".isspace())      # True
+print(" hello ".isspace())  # False
+```
+
+### islower()
+Returns True if all cased characters are lowercase.
+```python
+print("hello".islower())   # True
+print("Hello".islower())   # False
+```
+
+### isupper()
+Returns True if all cased characters are uppercase.
+```python
+print("HELLO".isupper())   # True
+print("Hello".isupper())   # False
+```
+
+### istitle()
+Returns True if string is in title case.
+```python
+print("Hello World".istitle())  # True
+print("Hello world".istitle())  # False
+```
+
+### isidentifier()
+Returns True if string is a valid Python identifier.
+```python
+print("variable_name".isidentifier())  # True
+print("2variable".isidentifier())      # False
+```
+
+### isprintable()
+Returns True if all characters are printable.
+```python
+print("Hello".isprintable())    # True
+print("Hello\n".isprintable())  # False
+```
+
+---
+
+## 4. String Modification Methods
+
+### replace()
+Replaces occurrences of a substring with another.
+```python
+text = "Hello World"
+print(text.replace("World", "Python"))  # Hello Python
+
+# Replace only first n occurrences
+text = "aaa bbb aaa"
+print(text.replace("aaa", "ccc", 1))  # ccc bbb aaa
+```
+
+### strip()
+Removes leading and trailing whitespace (or specified characters).
+```python
+text = "   Hello World   "
+print(text.strip())       # "Hello World"
+
+text = "***Hello***"
+print(text.strip("*"))    # "Hello"
+```
+
+### lstrip()
+Removes leading (left) whitespace or specified characters.
+```python
+text = "   Hello World   "
+print(text.lstrip())  # "Hello World   "
+```
+
+### rstrip()
+Removes trailing (right) whitespace or specified characters.
+```python
+text = "   Hello World   "
+print(text.rstrip())  # "   Hello World"
+```
+
+### removeprefix() (Python 3.9+)
+Removes a specific prefix from the string.
+```python
+text = "HelloWorld"
+print(text.removeprefix("Hello"))  # World
+```
+
+### removesuffix() (Python 3.9+)
+Removes a specific suffix from the string.
+```python
+text = "document.pdf"
+print(text.removesuffix(".pdf"))  # document
+```
+
+---
+
+## 5. Split and Join Methods
+
+### split()
+Splits string into a list using a delimiter.
+```python
+text = "Hello World Python"
+print(text.split())        # ['Hello', 'World', 'Python']
+
+csv = "apple,banana,cherry"
+print(csv.split(","))      # ['apple', 'banana', 'cherry']
+
+# Limit splits
+text = "one-two-three-four"
+print(text.split("-", 2))  # ['one', 'two', 'three-four']
+```
+
+### rsplit()
+Splits from the right side.
+```python
+text = "one-two-three-four"
+print(text.rsplit("-", 2))  # ['one-two', 'three', 'four']
+```
+
+### splitlines()
+Splits string at line breaks.
+```python
+text = "Line1\nLine2\nLine3"
+print(text.splitlines())  # ['Line1', 'Line2', 'Line3']
+```
+
+### join()
+Joins elements of an iterable with the string as separator.
+```python
+words = ['Hello', 'World', 'Python']
+print(" ".join(words))    # Hello World Python
+print("-".join(words))    # Hello-World-Python
+print(",".join(words))    # Hello,World,Python
+```
+
+### partition()
+Splits string into 3 parts: before, separator, after (first occurrence).
+```python
+text = "Hello World Python"
+print(text.partition("World"))  # ('Hello ', 'World', ' Python')
+```
+
+### rpartition()
+Same as partition() but searches from the right.
+```python
+text = "Hello World World Python"
+print(text.rpartition("World"))  # ('Hello World ', 'World', ' Python')
+```
+
+---
+
+## 6. Padding and Alignment Methods
+
+### center()
+Centers the string within a specified width.
+```python
+text = "Hello"
+print(text.center(20))       # "       Hello        "
+print(text.center(20, "*"))  # "*******Hello********"
+```
+
+### ljust()
+Left-justifies the string within a specified width.
+```python
+text = "Hello"
+print(text.ljust(20))       # "Hello               "
+print(text.ljust(20, "-"))  # "Hello---------------"
+```
+
+### rjust()
+Right-justifies the string within a specified width.
+```python
+text = "Hello"
+print(text.rjust(20))       # "               Hello"
+print(text.rjust(20, "-"))  # "---------------Hello"
+```
+
+### zfill()
+Pads string with zeros on the left to fill specified width.
+```python
+num = "42"
+print(num.zfill(5))   # 00042
+
+num = "-42"
+print(num.zfill(5))   # -0042
+```
+
+---
+
+## 7. Encoding and Translation Methods
+
+### encode()
+Encodes the string using the specified encoding.
+```python
+text = "Hello World"
+print(text.encode("utf-8"))    # b'Hello World'
+print(text.encode("ascii"))    # b'Hello World'
+```
+
+### maketrans() and translate()
+Creates a translation table and applies it.
+```python
+# Replace characters
+table = str.maketrans("aeiou", "12345")
+text = "hello world"
+print(text.translate(table))  # h2ll4 w4rld
+
+# Remove characters
+table = str.maketrans("", "", "aeiou")
+text = "hello world"
+print(text.translate(table))  # hll wrld
+```
+
+---
+
+## 8. Formatting Methods
+
+### format()
+Formats the string with specified values.
+```python
+# Positional arguments
+print("Hello, {}! You are {} years old.".format("Alice", 30))
+# Hello, Alice! You are 30 years old.
+
+# Named arguments
+print("Hello, {name}! Age: {age}".format(name="Bob", age=25))
+# Hello, Bob! Age: 25
+
+# Number formatting
+print("Price: {:.2f}".format(49.5))    # Price: 49.50
+print("Percent: {:.1%}".format(0.85))  # Percent: 85.0%
+```
+
+### format_map()
+Formats using a dictionary mapping.
+```python
+data = {"name": "Alice", "age": 30}
+print("Name: {name}, Age: {age}".format_map(data))
+# Name: Alice, Age: 30
+```
+
+### f-strings (Python 3.6+)
+Inline string formatting (not a method, but essential).
+```python
+name = "Alice"
+age = 30
+print(f"Hello, {name}! You are {age} years old.")
+# Hello, Alice! You are 30 years old.
+
+# Expressions inside f-strings
+print(f"Sum: {2 + 3}")          # Sum: 5
+print(f"Upper: {name.upper()}")  # Upper: ALICE
+```
+
+---
+
+## 9. Other Useful Methods
+
+### expandtabs()
+Sets the tab size for tab characters.
+```python
+text = "Hello\tWorld\tPython"
+print(text.expandtabs(4))   # Hello   World   Python
+print(text.expandtabs(10))  # Hello     World     Python
+```
+
+---
+
+## 10. Built-in Functions for Strings
+
+### len()
+Returns the length of the string.
+```python
+text = "Hello World"
+print(len(text))  # 11
+```
+
+### ord()
+Returns the Unicode code point of a character.
+```python
+print(ord("A"))  # 65
+print(ord("a"))  # 97
+```
+
+### chr()
+Returns the character for a Unicode code point.
+```python
+print(chr(65))   # A
+print(chr(97))   # a
+```
+
+### str()
+Converts an object to its string representation.
+```python
+print(str(123))      # "123"
+print(str(3.14))     # "3.14"
+print(str([1,2,3]))  # "[1, 2, 3]"
+```
+
+### repr()
+Returns a printable representation of the object.
+```python
+text = "Hello\nWorld"
+print(repr(text))  # 'Hello\nWorld'
+```
+
+### sorted()
+Returns a sorted list of characters.
+```python
+text = "python"
+print(sorted(text))  # ['h', 'n', 'o', 'p', 't', 'y']
+```
+
+### reversed()
+Returns a reversed iterator.
+```python
+text = "Hello"
+print("".join(reversed(text)))  # olleH
+```
+
+---
+
+## 11. String Slicing (Not a method, but essential)
+
+```python
+text = "Hello World"
+
+print(text[0])       # H (first character)
+print(text[-1])      # d (last character)
+print(text[0:5])     # Hello (index 0 to 4)
+print(text[6:])      # World (index 6 to end)
+print(text[:5])      # Hello (start to index 4)
+print(text[::2])     # HloWrd (every 2nd character)
+print(text[::-1])    # dlroW olleH (reverse string)
+```
+
+---
+
+## 12. String Concatenation and Repetition
+
+```python
+# Concatenation
+str1 = "Hello"
+str2 = "World"
+print(str1 + " " + str2)  # Hello World
+
+# Repetition
+print("Ha" * 3)  # HaHaHa
+
+# Join (preferred for multiple strings)
+parts = ["Hello", "World", "Python"]
+print(" ".join(parts))  # Hello World Python
+```
+
+---
+
+## Quick Reference Table
+
+| Method | Description |
+|--------|-------------|
+| upper() | Converts to uppercase |
+| lower() | Converts to lowercase |
+| title() | Title case |
+| capitalize() | Capitalize first char |
+| swapcase() | Swap case |
+| strip() | Remove leading/trailing whitespace |
+| lstrip() | Remove leading whitespace |
+| rstrip() | Remove trailing whitespace |
+| split() | Split into list |
+| join() | Join iterable into string |
+| replace() | Replace substring |
+| find() | Find substring index |
+| count() | Count occurrences |
+| startswith() | Check prefix |
+| endswith() | Check suffix |
+| isalpha() | Check if alphabetic |
+| isdigit() | Check if digits |
+| isalnum() | Check if alphanumeric |
+| isspace() | Check if whitespace |
+| center() | Center align |
+| ljust() | Left align |
+| rjust() | Right align |
+| zfill() | Zero-fill |
+| encode() | Encode string |
+| format() | Format string |
+
+---
+
+*Document created for Python 3.x*
+
+
